@@ -16,7 +16,7 @@ const shopInfoModal = ({shopInfo={}, fetchGeolocation}) => {
         <div className="ranking">
           <Link to="/ranking">
             <img src={iconPin} alt="현재위치"/>
-            <span>내 주변 인기 스트릿푸드는?</span>
+            <span className="text">내 주변 인기 스트릿푸드는?</span>
           </Link>
         </div>
       </div>
