@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import scriptUtill from '../../util/scriptUtill';
 import './style.scss';
 import mapPinOn from '../../assets/imgs/mapPinOn.png';
@@ -12,10 +12,10 @@ let selectedMarkerImg = null
 
 const MainMap = ({ location, shopList = [], containerId = null, onEvent, selectShopId, getGeocoder, setLocation }) => {
   const dispatch = useDispatch();
-  const mainLocation = useSelector(state => state.startReducer.location)
+  const mainLocation = useSelector(state => state.startReducer.location, shallowEqual)
   const [crrlocation, setCrrLocation] = useState(location)
-  const shopId = useSelector(state => state.shopReducer.selectShopId)
-  const shopDetail = useSelector(state => state.shopReducer.shopDetail);
+  const shopId = useSelector(state => state.shopReducer.selectShopId, shallowEqual)
+  const shopDetail = useSelector(state => state.shopReducer.shopDetail, shallowEqual);
   const [Map, setMap] = useState(null)
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const MainMap = ({ location, shopList = [], containerId = null, onEvent, selectS
 
   useEffect(() => {
     renderMap()
-  }, [mainLocation]);
+  }, []);
 
   useEffect(() => {
     if (Map) {
@@ -58,6 +58,7 @@ const MainMap = ({ location, shopList = [], containerId = null, onEvent, selectS
       if (getGeocoder && Object.keys(crrlocation).length > 0) { setAddress() }
 
       if (shopList.length > 0) {
+        console.log(1)
         createShopsMarker();
       }
     }
@@ -65,6 +66,7 @@ const MainMap = ({ location, shopList = [], containerId = null, onEvent, selectS
 
   useEffect(() => {
     if (Map && shopList.length > 0) {
+      console.log(2, selectShopId)
       createShopsMarker();
     }
   }, [shopList]);

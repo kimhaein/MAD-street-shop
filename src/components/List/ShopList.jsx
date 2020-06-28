@@ -29,6 +29,7 @@ export const ShopItem = ({ index = 10, data, type, onEvent, history, userFavorit
   const dispatch = useDispatch();
   const isLogin = useSelector(state => state.userReducer.isLogin);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [likeScore, setLikeScore] = useState(data.likeScore);
 
   const getFavoirteList = (id) => {
     const findId = userFavorite.filter(v => v === id);
@@ -113,7 +114,7 @@ export const ShopItem = ({ index = 10, data, type, onEvent, history, userFavorit
 
         <div className="shopSubInfo">
           <span className="distance">{data.vicinity.toFixed(2)}m</span>
-          <span className={`heart ${data.likeScore ? "on" : ""}`}>{data.likeScore}</span>
+          <span className={`heart ${likeScore ? "on" : ""}`}>{likeScore}</span>
         </div>
       </div>
       {
@@ -122,8 +123,10 @@ export const ShopItem = ({ index = 10, data, type, onEvent, history, userFavorit
           if (isLogin) {
             if (isFavorite) {
               delFavoirteList(data._id)
+              setLikeScore(likeScore - 1)
             } else {
               putFavoirteList(data._id)
+              setLikeScore(likeScore + 1)
             }
             setIsFavorite(!isFavorite);
           } else {
