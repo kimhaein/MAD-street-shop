@@ -65,7 +65,7 @@
   width: 100%;
   background-color: $whiteColor;
   border: 1px solid $black01;
-  z-index: 99;
+  z-index: 999;
   &.open {
     bottom: 0px;
   }

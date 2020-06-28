@@ -43,6 +43,8 @@ const SignUpOwner = ({ history, match }) => {
   const { isShowing, title, contents, setAlert } = AlertUtil();
   const { targetModalPage, isModalOpen, setModalPage } = ModalPageUtill();
 
+  const [delImg, setDelImg] = useState([]);
+
 
   const rederModalPage = () => {
     switch (targetModalPage) {
@@ -125,6 +127,7 @@ const SignUpOwner = ({ history, match }) => {
           closeTime: closeTime,
           useKakao: true,
           files: formData,
+          deleteFiles: delImg.join(',')
         },
       })
     } else {
@@ -152,6 +155,8 @@ const SignUpOwner = ({ history, match }) => {
       })
     }
   }
+
+  console.log(firstFile, 'firstFile')
   return (
     <div className="main signUpOwner">
       <Header onEvent={history.goBack} />
@@ -230,7 +235,7 @@ const SignUpOwner = ({ history, match }) => {
         />
       </FormGroup>
       <ImgUploader files={firstFile} setFiles={setFirstFile} multiple={false} title={'대표이미지 등록'} info={'※ 가게를 대표하는 사진을 등록해주세요.'} />
-      <ImgUploader files={files} setFiles={setFiles} title={'사진 등록'} info={'※ 10장 이내의 사진을 등록해주세요. <b>판매하는 음식사진이나, 가게 전경, 영업 위치가 찍힌 사진</b>을 등록하면 판매에 도움이 됩니다.'} />
+      <ImgUploader files={files} setFiles={setFiles} title={'사진 등록'} info={'※ 10장 이내의 사진을 등록해주세요. <b>판매하는 음식사진이나, 가게 전경, 영업 위치가 찍힌 사진</b>을 등록하면 판매에 도움이 됩니다.'} delImg={delImg} setDelImg={setDelImg} />
       <Button
         active={true}
         onEvent={submitData}

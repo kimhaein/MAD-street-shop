@@ -224,7 +224,7 @@ export function* fetchWhoamiSaga(payload) {
           storeOpenDays: data.openDays,
           storeOpenTime: data.openTime.split(':'),
           storeCloseTime: data.closeTime.split(':'),
-          firstFile: data.imageUrl.pop(),
+          firstFile: data.imageUrl.shift(),
           files: data.imageUrl,
           shopInfo: data,
           shopActive: data.now.active

@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
 import { FormGroup } from '../FormGroup'
 import windowUtil from '../../util/windowUtil'
 import './style.scss';
 
-const ImgUploader = ({ fullMode = false, title = '', info = '', multiple = true, setFiles = null, files }) => {
+const ImgUploader = ({ fullMode = false, title = '', info = '', multiple = true, setFiles = null, files, delImg, setDelImg }) => {
   const [isImgUpload, setIsImgUpload] = useState(files.length > 0 ? false : true);
   const [imgFiles, setImgFiles] = useState([]);
   const [imgBase64, setImgBase64] = useState(files);
-
+  const userId = useSelector(state => state.userReducer.userId, shallowEqual);
+  const shopId = useSelector(state => state.userReducer.shopId, shallowEqual);
   const imgUploader = useRef();
 
   const fileReader = (target) => {
@@ -31,7 +33,7 @@ const ImgUploader = ({ fullMode = false, title = '', info = '', multiple = true,
     Promise.all(imgs).then(v => {
       if (v.length > 0) {
         setImgFiles([...imgFiles, target.files[0]])
-        setImgBase64([...imgFiles, v])
+        setImgBase64([...imgBase64, v])
         if (!multiple) setIsImgUpload(false)
       }
     });
@@ -40,10 +42,17 @@ const ImgUploader = ({ fullMode = false, title = '', info = '', multiple = true,
   const deleteImg = (index) => {
     if (!multiple) {
       setImgFiles([])
+      setImgBase64([])
       setIsImgUpload(true)
     } else {
       const img = imgFiles.filter((v, i) => index !== i)
+      const img64 = imgBase64.filter((v, i) => index !== i)
       setImgFiles(img)
+      setImgBase64(img64)
+      const delImg64 = imgBase64.filter((v, i) => index === i)
+      const text = delImg64[0].split('/')
+      setDelImg([...delImg, `${shopId}_${userId}/${text[text.length - 1]}`])
+
     }
 
   }
@@ -69,7 +78,7 @@ const ImgUploader = ({ fullMode = false, title = '', info = '', multiple = true,
   }
 
 
-
+  console.log(imgBase64)
   return (
     <FormGroup fullMode={fullMode} title={title} subTittle={(multiple ? `${imgFiles.length}/10` : null)} info={info}>
       <div className="imgUploaderBox">

@@ -46,21 +46,16 @@ const MainMap = ({ location, shopList = [], containerId = null, onEvent, selectS
 
   useEffect(() => {
     if (Map) {
-      selectedMarker = null
-      selectedMarkerImg = null
 
       if (containerId !== 'locationMap') {
         const marker = renderMarker(mapMarker, { width: 50, height: 48 }, location)
         marker.setMap(Map);
         moveMap(location)
       }
-      if (onEvent) {
-        clickMap(Map)
-      }
 
-      if (getGeocoder && Object.keys(crrlocation).length > 0) {
-        setAddress()
-      }
+      if (onEvent) { clickMap(Map) }
+
+      if (getGeocoder && Object.keys(crrlocation).length > 0) { setAddress() }
 
       if (shopList.length > 0) {
         createShopsMarker();
@@ -72,7 +67,7 @@ const MainMap = ({ location, shopList = [], containerId = null, onEvent, selectS
     if (Map && shopList.length > 0) {
       createShopsMarker();
     }
-  }, [selectShopId]);
+  }, [shopList]);
 
 
   // 지도 이동
