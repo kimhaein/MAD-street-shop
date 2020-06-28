@@ -59,7 +59,6 @@ export const logout = ({ token }) => {
  * @param
  */
 export const fetchKaKaoInfo = () => {
-  console.log('fetchKaKaoInfo', AuthUtill.accessToken)
   return KAKAO_API_INSTANCE.get('/v2/user/me',
     {
       headers: {
@@ -68,7 +67,6 @@ export const fetchKaKaoInfo = () => {
     }
   )
     .then(response => {
-      console.log('fetchKaKaoInfo')
       return response
     })
     .catch(error => {
@@ -91,7 +89,6 @@ export const postSignUpUser = ({ userId, userTags }) => {
     }
   )
     .then(response => {
-      console.log('postSignUpUser')
       return response
     })
     .catch(error => {
@@ -114,8 +111,7 @@ export const putUser = ({ userId, userTags }) => {
     }
   )
     .then(response => {
-      console.log('putUser')
-      return response
+      return response;
     })
     .catch(error => {
       console.log('putUser', error);
@@ -129,7 +125,6 @@ export const putUser = ({ userId, userTags }) => {
  */
 export const postSignUpOwner = (data) => {
   data.category = JSON.stringify(data.category)
-  console.log('postSignUpOwner', data)
   return API_INSTANCE.post('/users/join/owner',
     qs.stringify(data),
     {
@@ -138,8 +133,7 @@ export const postSignUpOwner = (data) => {
       }
     })
     .then(response => {
-      console.log('postSignUpUser')
-      return response
+      return response;
     })
     .catch(error => {
       console.log('postSignUpUser', error);
@@ -162,7 +156,7 @@ export const putOwner = (data) => {
     }
   )
     .then(response => {
-      return response
+      return response;
     })
     .catch(error => {
       console.log('putOwner', error);
@@ -175,7 +169,6 @@ export const putOwner = (data) => {
  * @param
  */
 export const putImgUpload = ({ files, userId, shopId }) => {
-  console.log('putImgUpload', files, userId, shopId)
   const data = { files }
   return API_INSTANCE.put(`/users/upload-img/${userId}/${shopId}`,
     files,
@@ -187,8 +180,7 @@ export const putImgUpload = ({ files, userId, shopId }) => {
     }
   )
     .then(response => {
-      console.log('putImgUpload')
-      return response
+      return response;
     })
     .catch(error => {
       console.log('putImgUpload', error);
@@ -201,13 +193,11 @@ export const putImgUpload = ({ files, userId, shopId }) => {
  * @param
  */
 export const deleteUser = ({ userId }) => {
-  console.log(AuthUtill.accessToken)
   return API_INSTANCE.delete(`users/${userId}/leave`,
     { headers: { 'Authorization': `Bearer ${AuthUtill.accessToken}` } }
   )
     .then(response => {
-      console.log('putImgUpload')
-      return response
+      return response;
     })
     .catch(error => {
       console.log('putImgUpload', error);
@@ -228,8 +218,7 @@ export const fetchWhoami = ({ token, userId }) => {
     },
   )
     .then(response => {
-      console.log('whoami')
-      return response
+      return response;
     })
     .catch(error => {
       console.log('whoami', error);
@@ -243,7 +232,6 @@ export const fetchWhoami = ({ token, userId }) => {
  * @param
  */
 export const fetchFavoritesList = ({ token, userId, location }) => {
-  console.log('관심리스트', qs.stringify({ userId }))
   return API_INSTANCE.get(`/favorites/${userId}/`,
     {
       params: {
@@ -256,7 +244,7 @@ export const fetchFavoritesList = ({ token, userId, location }) => {
     },
   )
     .then(response => {
-      return response
+      return response;
     })
     .catch(error => {
       return error;
@@ -269,7 +257,6 @@ export const fetchFavoritesList = ({ token, userId, location }) => {
  * @param
  */
 export const postFavoritesList = ({ token, userId, shopId }) => {
-  console.log('관심리스트 설정', qs.stringify({ userId }), qs.stringify({ shopId }))
   return API_INSTANCE.post(`/favorites/${userId}/`, qs.stringify({ shopId: shopId }),
     {
       headers: {
@@ -278,7 +265,7 @@ export const postFavoritesList = ({ token, userId, shopId }) => {
     },
   )
     .then(response => {
-      return response
+      return response;
     })
     .catch(error => {
       return error;
@@ -291,7 +278,6 @@ export const postFavoritesList = ({ token, userId, shopId }) => {
  * @param
  */
 export const delFavoritesList = ({ userId, shopId }) => {
-  console.log('관심리스트 삭제', qs.stringify({ userId }), qs.stringify({ shopId }))
   return API_INSTANCE.delete(`/favorites/${userId}/`,
     {
       data: qs.stringify({ shopId }),
@@ -301,7 +287,7 @@ export const delFavoritesList = ({ userId, shopId }) => {
     }
   )
     .then(response => {
-      return response
+      return response;
     })
     .catch(error => {
       return error;

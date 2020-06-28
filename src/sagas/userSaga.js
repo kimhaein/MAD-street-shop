@@ -123,7 +123,6 @@ export function* putUserSaga({ payload }) {
 export function* postSignUpImgOwnerSaga(data) {
   const response = yield call(putImgUpload, data);
   if (response.data) {
-    console.log('카카오 사장님 이미지 업로드', response.data)
     yield fetchWhoamiSaga({ userId: data.userId })
     yield put({
       type: userTypes.USER_LODING,
@@ -154,7 +153,6 @@ export function* postSignUpImgOwnerSaga(data) {
 export function* postSignUpOwnerSaga({ payload }) {
   const response = yield call(postSignUpOwner, payload);
   if (response.data) {
-    console.log('카카오 사장님 회원가입', response.data)
     yield put({
       type: userTypes.SET_SIGNUP,
       payload: {
@@ -257,10 +255,8 @@ export function* fetchWhoamiSaga(payload) {
 }
 
 export function* fetchFavoritesListSaga({ payload }) {
-  console.log(111, payload)
   const response = yield call(fetchFavoritesList, payload);
   if (response.data) {
-    console.log('관심리스트', response.data)
     yield put({
       type: userTypes.SET_FAVORITE_LIST,
       payload: {
@@ -284,22 +280,18 @@ export function* fetchFavoritesListSaga({ payload }) {
 }
 
 export function* postFavoritesListSaga({ payload }) {
-  console.log('putFavoritesListSaga', payload)
   const response = yield call(postFavoritesList, payload);
   if (response.data) {
     yield fetchWhoamiSaga({ userId: payload.userId })
-    console.log('관심리스트', response.data)
   }
 
 }
 
 
 export function* delFavoritesListSaga({ payload }) {
-  console.log('putFavoritesListSaga', payload)
   const response = yield call(delFavoritesList, payload);
   if (response.data) {
     yield fetchWhoamiSaga({ userId: payload.userId })
-    console.log('관심리스트', response.data)
   }
 
 }

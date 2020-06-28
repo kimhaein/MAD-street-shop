@@ -113,7 +113,6 @@ const MainMap = ({ location, shopList = [], containerId = null, onEvent, selectS
 
       selectedMarker = marker;
       selectedMarkerImg = src;
-
       moveMap(location)
       onEvent({
         target: 'ShopDetailModal',
@@ -206,7 +205,6 @@ const MainMap = ({ location, shopList = [], containerId = null, onEvent, selectS
   }
 
   const renderMap = () => {
-    console.log('renderMap')
     const container = document.getElementById(containerId);
     const options = {
       center: new window.kakao.maps.LatLng(crrlocation.lat, crrlocation.long), // 지도의 중심좌표.

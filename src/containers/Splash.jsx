@@ -34,8 +34,6 @@ const Splash = ({ history }) => {
       timeout: 15000,
     };
 
-    console.log('주소가져오기')
-
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
         dispatch({

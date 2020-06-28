@@ -5,7 +5,6 @@ import { ShopItem } from '../List'
 
 
 const shopInfo = ({ shopInfo = {}, fetchGeolocation, onEvent }) => {
-
   return (
     <div className="shopInfoBox">
       <div className="shopInfoList">

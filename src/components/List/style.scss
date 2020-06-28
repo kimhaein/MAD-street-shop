@@ -12,6 +12,9 @@
     text-align: center;
     border-bottom:1px solid rgba(0, 0, 0, 0.1);
   }
+  &.is_no_data {
+    background: transparent;
+  }
 }
 .shopListItem {
   display: flex;

@@ -6,6 +6,7 @@ import { AccordionList } from "../components/List";
 
 const Notice = ({ history }) => {
   const noticeList = useSelector(state => state.startReducer.ntc, []);
+
   return (
     <div className="main myPage">
       <ModalHeader onEvent={history.goBack} border={false} />

@@ -10,9 +10,6 @@ const shopDetailModal = ({ shopInfo, isOpen = true, onEvent = null, userFavorite
   const times = shopInfo.now.active ? `${shopInfo.now.openTime}~${shopInfo.now.closeTime}` : `${shopInfo.openTime}~${shopInfo.closeTime}`
   const locationComment = shopInfo.now.active ? shopInfo.now.locationComment : shopInfo.locationComment
 
-  // console.log('userFavorite', userFavorite);
-  // console.log('>>>>>>>>>>>>>>data>>>>>>>>>', typeof shopInfo._id, shopInfo._id);
-
   return (
     <div className={`shopDetailModal ${isOpen ? 'open' : ''}`}>
       <ShopItem data={shopInfo} type='icon' userFavorite={userFavorite} userId={userIdNumber} token={token} />
